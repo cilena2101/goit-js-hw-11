@@ -46,7 +46,13 @@ function onSearchForm(e) {
     );
 		} else {
     renderGalleryImages(data.hits);
-    SimpleLightbox = new SimpleLightbox('.gallery a').refresh();
+    // SimpleLightbox = new SimpleLightbox('.gallery a').refresh();
+			
+			new SimpleLightbox('.gallery a', {
+	caption: true,
+	captionData: 'alt',
+	captionDelay: 250,
+});
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
    }
   })
@@ -61,8 +67,12 @@ function handleMoreBtClick() {
 	fetchImages(query, page, perPage)
   .then((data) => {
    galleryEl.insertAdjacentHTML("beforeend", createGalleryCards(data.hits));
-		simpleLightbox = new SimpleLightbox('.gallery a').refresh();
-		
+		// simpleLightbox = new SimpleLightbox('.gallery a').refresh();
+		new SimpleLightbox('.gallery a', {
+	caption: true,
+	captionData: 'alt',
+	captionDelay: 250,
+});
 		const totalPages = Math.ceil(data.totalHits / perPage )
 		if (page >= totalPages) {
 		 loadMoreBtEl.classList.add("is-hidden");
