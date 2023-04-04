@@ -5,7 +5,6 @@ axios.defaults.baseURL = 'https://pixabay.com/api/';
 axios.interceptors.response.use(response => {
     return response;
 }, error => {
-		Notiflix.Notify.failure('Something went wrong. Please try again later.');
     return Promise.reject(error);
 });
 	

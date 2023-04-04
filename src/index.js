@@ -1,5 +1,5 @@
 import { fetchImages } from "./js/fetchImages";
-import Notiflix from "notiflix";
+import Notiflix from 'notiflix';
 import createGalleryCards from "./templates/gallery-card.hbs";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
@@ -11,6 +11,7 @@ const loadMoreBtEl = document.querySelector(".load-more");
 let query = "";
 let page = 1;
 const perPage = 40;
+let simpleLightBox;
 
 searchFormEl.addEventListener("submit", onSearchForm);
 
@@ -45,7 +46,7 @@ function onSearchForm(e) {
     );
 		} else {
     renderGalleryImages(data.hits);
-    simpleLightBox = new SimpleLightbox(".gallery a").refresh();
+    SimpleLightbox = new SimpleLightbox('.gallery a').refresh();
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
    }
   })
@@ -60,13 +61,13 @@ function handleMoreBtClick() {
 	fetchImages(query, page, perPage)
   .then((data) => {
    galleryEl.insertAdjacentHTML("beforeend", createGalleryCards(data.hits));
-		simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+		simpleLightbox = new SimpleLightbox('.gallery a').refresh();
 		
 		const totalPages = Math.ceil(data.totalHits / perPage )
 		if (page >= totalPages) {
 		 loadMoreBtEl.classList.add("is-hidden");
    		Notiflix.Notify.failure(
-   		'Sorry, there are no more pictures according to your request',
+   		"We're sorry, but you've reached the end of search results.",
    	);
    }
 		
